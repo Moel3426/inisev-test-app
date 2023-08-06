@@ -31,14 +31,9 @@ class SendPostEmails extends Command
 
         foreach ($websites as $website) {
             $latestPost = $website->posts()->latest()->first();
-            
+
             foreach ($website->subscriptions as $subscription) {
-                if (!$subscription->hasReceivedPost($latestPost)) {
-                    // Queue the email job for sending.
-                    SendPostEmailJob::dispatch($subscription->email, $latestPost);
-                    
-                    $subscription->markPostAsSent($latestPost);
-                }
+                SendPostEmailJob::dispatch($subscription->email, $latestPost);
             }
         }
     }

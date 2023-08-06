@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Website;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
@@ -11,7 +12,17 @@ class Post extends Model
 
     protected $fillable = [
         'title',
-        'content',
+        'description',
         'website_id',
     ];
+
+    public function website()
+    {
+        return $this->belongsTo(Website::class);
+    }
+
+    public function subscribers()
+    {
+        return $this->belongsToMany(Subscription::class);
+    }
 }

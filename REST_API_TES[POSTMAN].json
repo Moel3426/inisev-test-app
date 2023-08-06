@@ -1,0 +1,115 @@
+{
+	"info": {
+		"_postman_id": "dfcc66a8-f215-4a4f-b9ca-d5a13d3b2199",
+		"name": "Inisev Test",
+		"description": "This API allows you to create a new post for a particular website in the subscription platform and allows users to subscribe to a particular website in the subscription platform.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14935483",
+		"_collection_link": "https://cloudy-capsule-604774.postman.co/workspace/5f852bb8-b63d-4622-9f4c-ae546aec7a0e/collection/14935483-dfcc66a8-f215-4a4f-b9ca-d5a13d3b2199?action=share&creator=14935483&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Create Post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Title Post",
+							"description": "(String) - Title of the new post.",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Description Post",
+							"description": "(String) - Description of the new post.",
+							"type": "text"
+						},
+						{
+							"key": "website_id",
+							"value": "2",
+							"description": "(Number) - ID of the website for the new post.",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/posts",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"posts"
+					]
+				},
+				"description": "This API allows you to create a new post for a particular website in the subscription platform."
+			},
+			"response": []
+		},
+		{
+			"name": "New Subscriber",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "website_id",
+							"value": "2",
+							"description": "ID of the website to subscribe to.",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "maulanaihsanpress@gmail.com",
+							"description": "Email address of the subscriber.",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/subscriptions",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"subscriptions"
+					]
+				},
+				"description": "This API allows users to subscribe to a particular website in the subscription platform."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://127.0.0.1:8000/api",
+			"type": "string"
+		}
+	]
+}

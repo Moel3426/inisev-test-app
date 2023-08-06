@@ -21,6 +21,6 @@ class PostPublished extends Mailable
     public function build()
     {
         return $this->subject('New Post Published: ' . $this->post->title)
-            ->view('emails.post_published'); // This is the email template view file.
+            ->view('emails.post_published');
     }
 }
