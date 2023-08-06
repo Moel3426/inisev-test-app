@@ -14,7 +14,9 @@ class Post extends Model
         'title',
         'description',
         'website_id',
+        'notify'
     ];
+
 
     public function website()
     {
@@ -24,5 +26,10 @@ class Post extends Model
     public function subscribers()
     {
         return $this->belongsToMany(Subscription::class);
+    }
+
+    public function scopeHasNotNotify($query)
+    {
+        return $query->where('notify', 0);
     }
 }

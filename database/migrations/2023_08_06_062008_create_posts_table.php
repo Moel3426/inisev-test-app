@@ -16,7 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('website_id');
             $table->foreign('website_id')->references('id')->on('websites')->onDelete('cascade');
             $table->string('title');
-            $table->text('description'); 
+            $table->text('description');
+            $table->boolean('notify')->default(false);
             $table->timestamps();
         });
     }

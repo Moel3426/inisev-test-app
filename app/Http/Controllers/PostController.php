@@ -18,8 +18,6 @@ class PostController extends Controller
         // create the post
         $latestPost = PostService::createPost($data);
 
-        // use the SendPostEmails command to send the emails use call
-        Artisan::call('app:send-post-emails');
 
         // give api response
         return response()->json([

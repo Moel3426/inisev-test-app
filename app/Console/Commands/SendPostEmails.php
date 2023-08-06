@@ -30,8 +30,13 @@ class SendPostEmails extends Command
         $websites = Website::with('subscriptions')->get();
 
         foreach ($websites as $website) {
-            $latestPost = $website->posts()->latest()->first();
+            $latestPost = $website->posts()->hasNotNotify()->latest()->first();
 
+            if(!$latestPost) {
+                return;
+            }
+
+            $latestPost->update(['notify' => 1]);
             foreach ($website->subscriptions as $subscription) {
                 SendPostEmailJob::dispatch($subscription->email, $latestPost);
             }
