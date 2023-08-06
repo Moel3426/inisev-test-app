@@ -24,7 +24,7 @@
 						},
 						{
 							"key": "description",
-							"value": "Description Post",
+							"value": "Description 1 Post",
 							"description": "(String) - Description of the new post.",
 							"type": "text"
 						},
@@ -50,7 +50,7 @@
 			"response": []
 		},
 		{
-			"name": "New Subscriber",
+			"name": "Subscribe by Email",
 			"request": {
 				"method": "POST",
 				"header": [],
