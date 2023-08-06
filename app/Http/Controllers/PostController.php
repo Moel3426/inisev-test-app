@@ -2,37 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
-use App\Models\Website;
-use Illuminate\Http\Request;
-use App\Jobs\SendPostEmailJob;
-use Illuminate\Console\Command;
+use App\Http\Requests\CreatePostRequest;
 use Illuminate\Support\Facades\Artisan;
-use App\Console\Commands\SendPostEmails;
+use App\Services\PostService;
+use Symfony\Component\HttpFoundation\Response;
 
 class PostController extends Controller
 {
     // create a new post
-    public function create(Request $request)
+    public function create(CreatePostRequest $request)
     {
         // validate the request
-        $data = $request->validate([
-            'title' => 'required|string',
-            'description' => 'required|string',
-            'website_id' => 'required|integer',
-        ]);
+        $data = $request->validated();
 
         // create the post
-        $latestPost = Post::create($data);
+        $latestPost = PostService::createPost($data);
 
         // use the SendPostEmails command to send the emails use call
         Artisan::call('app:send-post-emails');
 
-
-        // return a response
+        // give api response
         return response()->json([
             'message' => 'Post created successfully.',
             'post' => $latestPost,
-        ], 201);
+        ], Response::HTTP_CREATED );
     }
 }

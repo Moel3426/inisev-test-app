@@ -1,25 +1,24 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Website;
-use App\Models\Subscription;
+use App\Http\Requests\SubscribeRequest;
+use App\Services\SubscriptionService;
+use Symfony\Component\HttpFoundation\Response;
 
 class SubscriptionController extends Controller
 {
 
-    public function subscribe(Request $request)
+    public function subscribe(SubscribeRequest $request)
     {
-        $data = $request->validate([
-            'website_id' => 'required|exists:websites,id',
-            'email' => 'required|email|unique:subscriptions,email,NULL,id,website_id,' . $request->input('website_id'),
-        ]);
+        // validate the request
+        $data = $request->validated();
 
-        Subscription::create($data);
+        // subscribe the user
+        SubscriptionService::subscribe($data);
 
         // give api response
         return response()->json([
             'message' => 'Subscription created successfully.',
-        ], 201);
+        ], Response::HTTP_CREATED);
     }
 }
